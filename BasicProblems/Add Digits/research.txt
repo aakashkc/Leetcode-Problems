@@ -1,0 +1,325 @@
+yeah i know it access from right to left but how to do it from left to right
+
+Excellent question.
+This is where real number manipulation logic starts developing.
+
+Using:
+
+% 10
+// 10
+
+naturally gives digits from:
+
+right → left
+
+because % 10 extracts the last digit.
+
+Now think:
+
+For:
+
+67859
+
+how could you get:
+
+6
+
+first?
+
+Hint 1
+
+Ask yourself:
+
+“What power of 10 is the number close to?”
+
+Example:
+
+67859≈10
+4
+
+because it has 5 digits.
+
+Hint 2
+
+What happens if you do:
+
+67859 // 10000
+
+?
+
+You isolate the leftmost digit.
+
+Hint 3
+
+After extracting 6,
+how would you REMOVE it from the number?
+
+Think about:
+
+modulo with power of 10
+
+This is the core mathematical idea behind:
+
+left-to-right digit traversal
+digit counting
+logarithm problems
+radix sort concepts
+
+Try to manually derive:
+
+how to get first digit
+how to remove first digit
+repeat process
+
+You want:
+
+if loop executes at least once AND finishes normally → return one value
+if loop never runs → return another value
+Best Way
+
+Use a flag variable.
+
+def test(x):
+
+    loop_ran = False
+
+    while x > 0:
+
+        loop_ran = True
+        x -= 1
+
+    if loop_ran:
+        return "Loop finished"
+    else:
+        return "Loop never ran"
+Example 1
+test(3)
+
+Output:
+
+Loop finished
+
+because loop executed.
+
+Example 2
+test(0)
+
+Output:
+
+Loop never ran
+
+because condition was False initially.
+
+Important DSA Concept
+
+This is called:
+
+State Tracking
+
+You track whether something happened.
+
+Very common in:
+
+graph traversal
+searching
+greedy algorithms
+BFS/DFS
+DP
+Cleaner Pythonic Way
+
+You can also use:
+
+def test(x):
+
+    while x > 0:
+        break
+
+    else:
+        return "Loop never ran"
+
+    return "Loop finished"
+VERY IMPORTANT Python Feature
+
+while/for loops can have else.
+
+The else runs if loop finishes normally.
+
+Example
+while condition:
+    ...
+else:
+    ...
+
+The else executes when:
+
+loop condition becomes False
+NO break happened
+But in DSA
+
+The flag-variable approach is usually:
+
+clearer
+easier to debug
+more interview friendly
+
+So beginners should master that first.
+
+DSA Lesson Here
+
+This teaches an important interview concept:
+
+Mathematical Optimization
+
+Sometimes:
+
+simulation works
+but math reveals hidden patterns
+Complexity Comparison
+Approach	Time	Space
+Loop + digit extraction	O(log n)	O(1)
+Digital root math	O(1)	O(1)
+Important Interview Mindset
+
+Usually:
+
+first solve normally
+then optimize
+then search for patterns/math
+
+That is exactly what this problem is testing.
+
+
+
+What is Digital Root?
+
+The digital root means:
+
+Keep adding digits until only one digit remains.
+
+Example:
+
+38 → 3 + 8 = 11 → 1 + 1 = 2
+
+So digital root of 38 = 2
+
+Why the formula works
+
+digital root=1+(n−1)mod9
+
+This formula is based on modulo 9 behavior of numbers.
+
+Key Idea (Very Important)
+
+Every number has a special property:
+
+When you take:
+
+sum of digits repeatedly
+
+it behaves like:
+
+n mod 9
+But why mod 9?
+
+Because:
+
+10 ≡ 1 (mod 9)
+
+That means:
+
+10 behaves like 1 in modulo 9
+100 behaves like 1
+1000 behaves like 1
+
+So place value disappears in mod 9.
+
+Example
+
+Take:
+
+123
+Step 1: normal sum
+1 + 2 + 3 = 6
+Step 2: mod 9 check
+123 % 9 = 6
+
+Same result.
+
+Now the formula part
+
+We use:
+
+1+(n−1)mod9
+
+instead of just:
+
+n % 9
+Why not just n % 9?
+
+Because of a special case:
+
+Problem with 9
+9 % 9 = 0 ❌
+
+But digital root of 9 should be:
+
+9
+
+So we fix it using:
+
+1 + (n - 1) % 9
+Let’s test it
+Example 1
+n = 38
+
+Step:
+
+1 + (38 - 1) % 9
+= 1 + 37 % 9
+= 1 + 1
+= 2
+
+✔ correct
+
+Example 2
+n = 9
+
+Step:
+
+1 + (9 - 1) % 9
+= 1 + 8 % 9
+= 1 + 8
+= 9
+
+✔ correct
+
+Example 3
+n = 18
+1 + (18 - 1) % 9
+= 1 + 17 % 9
+= 1 + 8
+= 9
+
+✔ correct
+
+Intuition in Simple Words
+
+Think of numbers in a cycle of 9:
+
+1 → 2 → 3 → ... → 9 → 1 → 2 → 3 ...
+
+So:
+
+numbers “wrap around” every 9
+digital root is just position in this cycle
+Super Simple Summary
+Digital root = repeated digit sum
+Same as modulo 9 pattern
+Formula fixes the edge case of multiples of 9
+Key DSA Insight
+
+This is NOT just math — it teaches:
+
+“Find hidden patterns instead of simulating everything”
+
+That’s a top-tier interview skill.
