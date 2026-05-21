@@ -1,0 +1,200 @@
+        """
+        if n == 1 :
+            return True
+        factors=[]
+        for i in range(2,n+1):
+            while n > 1:
+                if n % i == 0:
+                    factors.append(True) if i == 2 or i ==3 or i ==5 else factors.append(False)
+                    n=n//i
+                else :
+                    break
+        return all(factors). this is leetcode problem solution 263 ugly number . okay refactor it and suggest my weakness and provide better approach it can be done from DSA master prospective
+
+Good attempt — you are clearly trying to use prime factorization thinking, which is the right direction.
+
+But this implementation has a few DSA-level issues. Let’s break it properly.
+
+🔴 Problems in Your Code
+1. You are modifying n inside a loop over i
+for i in range(2, n+1):
+    while n > 1:
+
+❌ This breaks logic because:
+
+n is shrinking
+loop range was decided using original n
+outer loop becomes meaningless
+2. Overcomplicated logic
+
+You are storing:
+
+factors = [True/False]
+
+Then doing:
+
+all(factors)
+
+❌ Not needed at all.
+
+You only need to know:
+
+“Does any bad prime exist?”
+
+Not list of booleans.
+
+3. Wrong algorithm direction
+
+You are trying:
+
+full prime factorization
+
+But this problem is simpler:
+
+repeatedly remove allowed factors only (2, 3, 5)
+
+4. Inefficient approach
+
+Time complexity becomes roughly:
+
+O(n log n)
+
+But optimal is:
+
+O(log n)
+🟢 DSA Master Mindset (Correct Idea)
+
+Instead of checking all primes:
+
+👉 Just remove allowed primes repeatedly.
+
+✔ Core Insight
+
+If a number is ugly:
+
+divide by 2 until not divisible
+divide by 3 until not divisible
+divide by 5 until not divisible
+
+If result becomes:
+
+1 → valid
+anything else → invalid
+🟢 Optimal Solution (Clean DSA Style)
+class Solution(object):
+    def isUgly(self, n):
+
+        if n <= 0:
+            return False
+
+        for factor in [2, 3, 5]:
+            while n % factor == 0:
+                n //= factor
+
+        return n == 1
+🔥 Why This Works
+
+You are removing ONLY allowed building blocks.
+
+So:
+
+Step	Meaning
+divide by 2	remove 2-factors
+divide by 3	remove 3-factors
+divide by 5	remove 5-factors
+leftover	check if clean
+🧠 Example Dry Run
+Input:
+n = 30
+Step 1: divide by 2
+
+not divisible → skip
+
+Step 2: divide by 3
+
+30 → 10
+
+Step 3: divide by 5
+
+10 → 2
+
+Now:
+
+n = 2
+
+Not 1 → ❌ not ugly
+
+Input:
+n = 6
+
+6 → 3 → 1 ✔
+
+⚠️ Your Weakness (Important DSA Feedback)
+1. Over-engineering
+
+You used:
+
+list storage
+boolean tracking
+full loop factorization
+
+👉 Interviewers prefer minimal logic
+
+2. Not recognizing pattern class
+
+This problem is NOT:
+
+brute force factorization
+
+It is:
+👉 repeated division elimination problem
+
+3. Unnecessary data structures
+factors = []
+
+This is a red flag in interviews when not needed.
+
+4. Incorrect loop reasoning
+
+You mixed:
+
+changing n
+iterating over i
+
+👉 This leads to logic instability
+
+🧠 How to Think in Future (VERY IMPORTANT)
+
+When you see:
+
+“only allowed primes / factors”
+
+DO NOT:
+
+list all primes
+factor completely
+
+DO:
+
+👉 “reduce the number using allowed factors only”
+
+🔥 Pattern Name (Memorize This)
+“Factor Elimination Pattern”
+
+Used in:
+
+Ugly Number
+Happy Number (similar mindset)
+GCD problems
+divisor reduction problems
+🚀 Final Takeaway
+
+You are improving, but next step is:
+
+Stop thinking:
+
+“How do I check everything?”
+
+Start thinking:
+
+“How do I eliminate what I don’t need?”
