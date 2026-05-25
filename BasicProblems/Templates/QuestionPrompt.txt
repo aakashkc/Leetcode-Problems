@@ -1,0 +1,47 @@
+The Core Principle
+Give GPT context + your code + specific questions. The more you narrow it down, the more useful the answer.
+
+The Prompt Template You Should Use
+Problem: [Problem name or description]
+My approach: [e.g., "I used a sliding window with a hashmap"]
+My code:
+[paste your code]
+
+Now tell me:
+1. Is my time and space complexity correct? What is it actually?
+2. What mistakes or bad habits do you see in my code?
+3. Is there a cleaner or more optimal approach?
+4. What edge cases did I miss that could break my solution?
+5. How would a senior engineer write this differently?
+
+Level-Up Variations
+When you want to think deeper before seeing the answer:
+
+"Don't give me the solution yet. Just tell me if my approach is on the right track and give me one hint."
+
+When you solved it but feel it's messy:
+
+"My solution works but feels brute-force. What pattern or data structure would make this more elegant? Explain why before showing code."
+
+When you want to understand your own mistake:
+
+"I got a wrong answer on this test case: [input] → expected [x] but got [y]. Walk me through why my logic fails here step by step."
+
+When you want to think like an interviewer:
+
+"If I gave this solution in a Google interview, what follow-up questions would the interviewer ask me? What would make them push back?"
+
+When you want pattern recognition:
+
+"What DSA pattern does this problem belong to? What are 3 other problems that use the exact same pattern so I can practice them?"
+
+
+What Most People Get Wrong
+❌ Weak ask✅ Strong ask"Is my code correct?""What's the time complexity and where exactly does it break down?""Show me a better solution""Show me a better solution and explain why mine is worse""Refactor this""Refactor this and call out every bad habit you see"Paste code onlyPaste code + your thought process
+
+One Golden Rule
+Always write your thought process before pasting code. Even one line like:
+
+"I thought this was a two-pointer problem because the array is sorted..."
+
+This forces GPT to evaluate your thinking, not just your syntax — which is where the real learning happens.
